@@ -63,6 +63,10 @@ if [[ $inhibit_update == "false" ]]; then
 		then
 			echo "$TYPE appears to be an ICAO hex and is valid, removing."
 			sed -r -i "/^$TYPE,/Id" /usr/share/planefence/persist/.internal/plane-alert-db.txt
+		elif [[ -n "$TYPE" ]]
+		then
+			echo "$TYPE appears to be a freeform search pattern, I dearly hope you know what you're doing!"
+			sed -r -i "/,[A-Za-z0-9 ]*$TYPE[A-Za-z0-9 ]*,/Id /usr/share/planefence/persist/.internal/plane-alert-db.txt
 		else
 			echo "$TYPE is invalid, skipping!"
 		fi
