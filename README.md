@@ -146,7 +146,7 @@ Note that the `call` parameter (see below) will start with `@` followed by the c
 - Check the logs: `docker logs -f planefence`. Some "complaining" about lost connections or files not found is normal, and will correct itself after a few minutes of operation. The logs will be quite explicit if it wants you to take action
 - Check the website: http://myip:8088 should update every 80 seconds (starting about 80 seconds after the initial startup). The top of the website shows a last-updated time and the number of messages received from the feeder station.
 - Plane-alert will appear at http://myip:8088/plane-alert
-- Twitter setup is complex and Elon will ban you if you publish anything about one of his planes. [Here](https://github.com/sdr-enthusiasts/docker-planefence#setting-up-tweeting)'s a description on what to do. We advice you to skip Twitter and send notifications to [Mastodon](https://github.com/sdr-enthusiasts/docker-planefence/README-Mastodon.md) instead.
+- Twitter setup is complex and Elon will ban you if you publish anything about one of his planes. [Here](https://github.com/sdr-enthusiasts/docker-planefence#setting-up-tweeting)'s a description on what to do. We advise you to skip Twitter and send notifications to [Mastodon](README-Mastodon.md) instead.
 - Error "We cannot reach {host} on port 30003". This could be caused by a few things:
   - Did you set the correct hostname or IP address in `PF_SOCK30003HOST` in `planefence.config`? This can be either an IP address, or an external hostname, or the name of another container in the same stack (in which case you use your machine's IP address).
   - Did you enable SBS (BaseStation -- *not* Beast!) output? Here are some hints on how to enable this:
@@ -160,7 +160,11 @@ Note that the `call` parameter (see below) will start with `@` followed by the c
 
     - For users of the `ultrafeeder` container, no additional changes should be needed (see below for enabling MLAT aircraft)
     - if you are using a different container stack, then you should also add `- 30003:30003` to the `ports:` section
-   - For users of `ultrafeeder`, if you want to enabled MLAT, make sure to set the following parameter in the `ultrafeeder` environment variables: `- READSB_FORWARD_MLAT_SBS=true`
+   - For users of `ultrafeeder`, if you want to enabled MLAT, make sure to set the following parameter in the `ultrafeeder` environment variables: `
+    
+    ```bash
+          - READSB_FORWARD_MLAT_SBS=true
+    ```
 
 ## Getting help
 
