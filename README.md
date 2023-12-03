@@ -151,10 +151,10 @@ Note that the `call` parameter (see below) will start with `@` followed by the c
   - Did you set the correct hostname or IP address in `PF_SOCK30003HOST` in `planefence.config`? This can be:
       - The name of another container in the same Docker compose stack, e.g., `ultrafeeder` or `tar1090`
       - IP address or an external hostname to a different server
-      - IP address or an external hostname to the same server if the Docker instance of `ultrafeeder`, `tar1090`, etc is in a different stack (adsb.im feeder image)
+      - IP address or an external hostname to the same server if the Docker instance of `ultrafeeder`, `tar1090`, etc. is in a different stack, e.g., adsb.im feeder image
   - Did you enable SBS (BaseStation -- *not* Beast!) output? Here are some hints on how to enable this:
-   - For non-containerized `dump1090[-fa]`/`readsb`/`tar1090`: add command line option `--net-sbs-port 30003`
-   - For containerized `readsb-protobuf`: add to the `environment:` section of your `docker-compose.yml` file:
+    - For non-containerized `dump1090[-fa]`/`readsb`/`tar1090`: add command line option `--net-sbs-port 30003`
+    - For containerized `readsb-protobuf`: add to the `environment:` section of your `docker-compose.yml` file:
   
       ```yaml
             - READSB_NET_SBS_OUTPUT_PORT=30003
@@ -162,12 +162,12 @@ Note that the `call` parameter (see below) will start with `@` followed by the c
       ```
 
     - For users of the `ultrafeeder` container, no additional changes should be needed (see below for enabling MLAT aircraft)
-    - If you are using a different container stack, then you should also add `- 30003:30003` to the `ports:` section
-    - For users of `ultrafeeder`, if you want to enabled MLAT, make sure to set the following parameter in the `ultrafeeder` environment variables:
+  - If you are using multiple Docker container stacks, then you should also add `- 30003:30003` to the `ports:` section in the `docker-compose.yml` file that contains your `ultrafeeder`, `tar1090`, `readsb`, or service.
+  - For users of `ultrafeeder`, if you want to enabled MLAT, make sure to set the following parameter in the `ultrafeeder` environment variables:
     
-      ```yaml
-            - READSB_FORWARD_MLAT_SBS=true
-      ```
+    ```yaml
+          - READSB_FORWARD_MLAT_SBS=true
+    ```
 
 ## Getting help
 
